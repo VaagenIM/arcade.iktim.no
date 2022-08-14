@@ -1,0 +1,122 @@
+site_name: IM Arcade
+site_url: https://arcade.iktim.no
+site_author: Sondre Grønås
+site_description: >-
+    Kolleksjon av publiserte og utviklede spill fra IM linja på Vågen VGS
+docs_dir: docs
+
+repo_name: arcade.iktim.no
+repo_url: https://github.com/VaagenIM/arcade.iktim.no
+edit_uri: edit/main/docs/
+
+copyright: "Copyright &copy; 2022 Sondre Grønås"
+
+
+theme:
+    name: material
+    custom_dir: overrides
+    language: "no"
+
+    palette:  # Light/Dark Mode
+    - media: "(prefers-color-scheme: light)"  # Light mode
+      scheme: default
+      primary: light blue
+      accent: cyan
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"  # Dark mode
+      scheme: slate
+      primary: light blue
+      accent: cyan
+      toggle:
+        icon: material/brightness-4
+        name: Light mode
+
+    features:
+        - content.code.annotate     # Add annotations to codeblocks (```code (1)``` 1. annotation)
+        - navigation.indexes        # Attach index.md to parent
+        - navigation.tracking       # Automatically add #anchor to URL while scrolling
+        - navigation.top            # Back to top button
+        - navigation.instant        # Load without reloading the page
+        - navigation.prune          # Performance / size optimization
+        - search.suggest            # Autocomplete results during search
+        - search.highlight          # Highlight occurences inside clicked search result
+        - search.share              # Share search URL button in text input
+
+    logo: logo.png
+    favicon: https://iktim.no/favicon.ico
+
+
+extra:
+  generator: false
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/sondregronas
+      name: "@sondregronas"
+    - icon: fontawesome/solid/paper-plane
+      link: mailto:mail@iktim.no
+
+
+markdown_extensions:
+  # Essentials
+  - meta                        # Load frontmatter (---\ntitle: Title\n---
+  - attr_list                   # Add HTML attributes to anything (![image](link) { align=left })
+  - nl2br                       # All linebreaks add <br> tags (starts new line on new lines...)
+  - mdx_breakless_lists         # single linebreak required for lists, instead of two
+  - pymdownx.magiclink          # Automatically wrap links to <a> tags https://google.com = <a href="https://google.com">https://google.com</a>
+
+  # Features
+  - footnotes                   # Citations (Zotero/Pandoc) ([^1], [^1]: Lorem ipsum)
+  - admonition                  # Callout blocks > [!INFO], > [!WARNING], > [!VIDEO], > [!TECH], > [!CODE] (alt: !!! type)  
+  - pymdownx.details            # https://squidfunk.github.io/mkdocs-material/reference/admonitions/#configuration
+  - pymdownx.tasklist:          # - [ ] Task, - [x] Task completed
+      custom_checkbox: true         # https://squidfunk.github.io/mkdocs-material/reference/lists/#using-definition-lists
+
+  # Code highlighting
+  - pymdownx.superfences        # Code higlighting ```language\n code\n ```
+  - pymdownx.highlight:         # Syntax highlighting + superfences
+      linenums: true                # numbered lines
+      anchor_linenums: true         # generate anchor links to line number
+  - pymdownx.inlinehilite       # Inline code highlighting
+  # Math / Formulas
+
+  - pymdownx.arithmatex:        # Mathematical formulas $f(a)=f(b)$ $5*2=10$
+      generic: true             # Clean formatting for non-MathJax libraries
+
+  # ^~= modifiers
+  - pymdownx.caret              # ^^underline^^, ^superscript^ (H^2^O)
+  - pymdownx.tilde              # ~~strikethrough~~, ~subscript~ (~2~OH)
+  - pymdownx.mark               # ==mark text== (yellow marker)
+  - pymdownx.betterem:          # **bold** *italic*, __bold__ _italic_ 
+      smart_enable: all             # Both modifiers (* and _)
+
+  # Extra
+  - pymdownx.keys               # ++ctrl+alt+delete++ 
+  - pymdownx.smartsymbols       # Convert special characters from markdown ((tm) = ™)
+  - smarty                      # '' -> ‘’, "" -> “”, etc..
+
+plugins:
+    - search                        # Search bar
+    - tags                          # Searchable tags
+    - callouts                      # Convert obsidian callouts to markdown format
+    - roamlinks                     # Use WikiLinks
+    - footermatter:                 # Last edited, date created, author links. Needs to be updated for proper author rendering
+        default_author_img: https://ui-avatars.com
+        default_author_url: https://github.com/VaagenIM/docs.iktim.no
+        locale: nb_NO
+        author_map:                 # Name in frontmatter | path RELATIVE TO: resources/assets/authors or URL | website
+          - Sondre Grønås | https://www.gravatar.com/avatar/4e0476393c848aef61ed66d404da0d14?s=250 | https://github.com/sondregronas
+    - bibtex:                       # Citations & reference management (Zotero)
+        bib_file: "https://api.zotero.org/groups/4658815/items?format=bibtex"
+        csl_file: "https://www.zotero.org/styles/harvard-cite-them-right?source=1"
+        cite_inline: True
+    - include_dir_to_nav            # Automatically generate nav: (show directories and pages in sidebar)
+    - exclude:                      # Exclude pattern from site
+        glob:
+          - .obsidian/*
+          - _DATA/*
+        regex:
+          - '.*\.(tmp|bin|tar)$'
+    - minify:                       # Optimize load times
+        minify_html: true
